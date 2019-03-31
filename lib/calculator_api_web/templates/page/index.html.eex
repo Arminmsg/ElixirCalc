@@ -1,8 +1,9 @@
 <section class="phx-hero">
   <h1><%= gettext "Welcome to %{name}!", name: "Calculator" %></h1>
   <div id="app">
-    <p>Enter your calculation {{expression}}</p>
+    <p>Enter your calculation</p>
     <input v-model="expression">
     <button v-on:click="submit">calculate</button>
+    <p>Last Result: {{result}}</p>
   </div>
 </section>

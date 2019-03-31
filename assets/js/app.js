@@ -23,15 +23,17 @@ var app = new Vue({
     el: '#app',
     data: {
         expression: '0',
-        result: null
+        result: null,
+        error: null
     },
     methods: {
         submit: function () {
+            this.error = null
             this.$http.post('/api/v1/calculator', {data: {expression: this.expression}}, { headers: { "content-type": "application/json" } })
                 .then(result => {
                     this.result = result.body["data"]["result"]
                 }, error => {
-                    console.error(error)
+                    this.error = error.body["message"]
                 })
         }
     }

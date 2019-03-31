@@ -3,7 +3,13 @@ defmodule CalculatorApiWeb.CalculatorController do
 
   def calculate(conn, params) do
     user_input = params["data"]["expression"]
-    json(conn, %{data: %{result: CalculatorApi.Calculator.calculate(user_input)}})
+    result = CalculatorApi.Calculator.calculate(user_input)
+
+    case result do
+      {:ok, value} -> json(conn, %{data: %{result: value}})
+      {:error, value} -> conn |> put_status(501) |> json(%{data: [], message: "Not Implemented"})
+    end
+
   end
 
 end

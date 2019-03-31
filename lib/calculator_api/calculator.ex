@@ -3,24 +3,25 @@ defmodule CalculatorApi.Calculator do
     Functions to make calculations on strings
   """
 
+  @spec calculate(String.t()) :: {:ok, float} | {:error, String.t()}
   def calculate string do
-    input = String.to_charlist(string)
-    eval(parse(input))
+    try do
+      input = String.to_charlist(string)
+      {:ok, eval(parse(input))}
+    rescue
+      MatchError -> {:error, "Invalid Input"}
+    end
+
   end
 
   defp parse string do
-    {:ok, tokens, _} = :lexer.string(string)
-    {:ok, tree} = :parser.parse(tokens)
-    tree
+      {:ok, tokens, _} = :lexer.string(string)
+      {:ok, tree} = :parser.parse(tokens)
+      tree
   end
 
   defp eval {:number, val} do
-
-    try do
-      List.to_float(elem(val, 0))
-    rescue
-      ArgumentError -> List.to_integer(elem(val, 0))
-    end
+    CalculatorApi.Util.charlist_to_float(elem(val, 0))
   end
 
   defp eval {:negative, val} do

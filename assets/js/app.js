@@ -22,13 +22,14 @@ Vue.use(VueResource);
 var app = new Vue({
     el: '#app',
     data: {
-        expression: 'Hello Vue!'
+        expression: '0',
+        result: null
     },
     methods: {
         submit: function () {
             this.$http.post('/api/v1/calculator', {data: {expression: this.expression}}, { headers: { "content-type": "application/json" } })
                 .then(result => {
-                    console.log(result)
+                    this.result = result.body["data"]["result"]
                 }, error => {
                     console.error(error)
                 })

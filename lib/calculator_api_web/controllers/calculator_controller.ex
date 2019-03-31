@@ -1,8 +1,8 @@
 defmodule CalculatorApiWeb.CalculatorController do
   use CalculatorApiWeb, :controller
 
-  def calculate(conn, _params) do
-    json(conn, "post received")
+  def calculate(conn, params) do
+    json(conn, params)
   end
 
 end

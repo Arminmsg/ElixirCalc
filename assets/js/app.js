@@ -10,11 +10,14 @@ import css from "../css/app.css"
 // Import dependencies
 //
 import "phoenix_html"
+import VueResource from 'vue-resource'
 
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
+
+Vue.use(VueResource);
 
 var app = new Vue({
     el: '#app',
@@ -23,7 +26,12 @@ var app = new Vue({
     },
     methods: {
         submit: function () {
-            alert(this.expression)
+            this.$http.post('/api/v1/calculator', {data: {expression: this.expression}}, { headers: { "content-type": "application/json" } })
+                .then(result => {
+                    console.log(result)
+                }, error => {
+                    console.error(error)
+                })
         }
     }
 });

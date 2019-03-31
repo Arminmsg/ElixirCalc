@@ -4,6 +4,5 @@
     <p>Enter your calculation {{expression}}</p>
     <input v-model="expression">
     <button v-on:click="submit">calculate</button>
-
   </div>
 </section>

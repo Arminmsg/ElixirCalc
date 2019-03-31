@@ -15,3 +15,15 @@ import "phoenix_html"
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
+
+var app = new Vue({
+    el: '#app',
+    data: {
+        expression: 'Hello Vue!'
+    },
+    methods: {
+        submit: function () {
+            alert(this.expression)
+        }
+    }
+});
